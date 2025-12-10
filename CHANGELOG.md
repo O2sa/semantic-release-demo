@@ -5,6 +5,20 @@
 شكل الملف يستند للمرجع [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 كما يتبع هذا المشروع آلية الإصدارت الدلالية [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/O2sa/semantic-release-demo/compare/1.2.0...2.0.0) (2025-12-10)
+
+### ⚠ BREAKING CHANGES
+
+* إعادة تسمية الدالة subtract إلى minu
+
+### الميزات الجديدة
+
+* إعادة تسمية الدالة subtract إلى minu ([1b0b04b](https://github.com/O2sa/semantic-release-demo/commit/1b0b04bb97a68094b51ee75ae47d161eb75eae0e))
+
+### الإصلاحات
+
+* دالة الطرح لا تتحقق من نوع المعاملات ([1f8da22](https://github.com/O2sa/semantic-release-demo/commit/1f8da220c686a40ad03591d13279f1e2705d139f))
+
 ## [1.2.0](https://github.com/O2sa/semantic-release-demo/compare/1.1.0...1.2.0) (2025-12-10)
 
 ### الميزات الجديدة
