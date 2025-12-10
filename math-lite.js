@@ -7,5 +7,8 @@ export function add(a, b, options = { absolute: false }) {
 }
 
 export function minus(a, b) {
+  if (typeof a !== 'number' || typeof b !== 'number') {
+    throw new Error("minus: يجب أن يكون كلا المعاملين رقمين");
+  }
   return a - b;
 }
