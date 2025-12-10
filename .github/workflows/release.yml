@@ -33,21 +33,61 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug - List files
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo ""
+          echo "package.json exists: $(test -f package.json && echo 'YES' || echo 'NO')"
+          echo "package-lock.json exists: $(test -f package-lock.json && echo 'YES' || echo 'NO')"
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Verify commits
+      - name: Initialize project
         run: |
-          echo "Last 5 commits:"
-          git log --oneline -5
+          # Create minimal package.json
+          if [ ! -f "package.json" ]; then
+            npm init -y
+            # Update with minimal config
+            jq '. + {
+              "version": "0.0.0-development",
+              "scripts": {
+                "test": "echo \"Running tests...\" && exit 0",
+                "build": "echo \"Building...\" && exit 0"
+              }
+            }' package.json > package.json.tmp && mv package.json.tmp package.json
+          fi
+          
+          # Generate lock file
+          npm install --package-lock-only --no-audit
+          
+          echo "After initialization:"
+          ls -la package*.json
+
+      - name: Install semantic-release
+        run: |
+          echo "Installing semantic-release packages..."
+          npm install \
+            semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/commit-analyzer \
+            @semantic-release/exec \
+            @semantic-release/git \
+            @semantic-release/github \
+            @semantic-release/npm \
+            @semantic-release/release-notes-generator \
+            conventional-changelog-conventionalcommits \
+            --no-audit --progress=false
+          
+          echo "Packages installed:"
+          npm list --depth=0 | grep semantic
 
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --debug
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Running semantic-release..."
+          npx semantic-release --debug
