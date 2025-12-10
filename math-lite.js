@@ -6,6 +6,6 @@ export function add(a, b, options = { absolute: false }) {
   return options.absolute ? Math.abs(result) : result;
 }
 
-export function subtract(a, b) {
+export function minus(a, b) {
   return a - b;
 }
