@@ -5,6 +5,12 @@
 شكل الملف يستند للمرجع [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 كما يتبع هذا المشروع آلية الإصدارت الدلالية [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1](https://github.com/O2sa/semantic-release-demo/compare/1.2.0...1.2.1) (2025-12-10)
+
+### الإصلاحات
+
+* دالة الطرح في الإصدار 1.x لا تتحقق من نوع المعاملات ([064e9cd](https://github.com/O2sa/semantic-release-demo/commit/064e9cdfb84e87b812043a171566e23e04186e5d))
+
 ## [1.2.0](https://github.com/O2sa/semantic-release-demo/compare/1.1.0...1.2.0) (2025-12-10)
 
 ### الميزات الجديدة
