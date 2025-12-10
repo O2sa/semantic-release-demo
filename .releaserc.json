@@ -1,0 +1,107 @@
+{
+  "branches": [
+    "main",
+    "1.x",
+    "2.x",
+    {
+      "name": "beta",
+      "prerelease": true
+    },
+    {
+      "name": "alpha",
+      "prerelease": true
+    },
+    {
+      "name": "next",
+      "prerelease": true
+    }
+  ],
+  "plugins": [
+    ["@semantic-release/commit-analyzer"],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            {
+              "type": "feat",
+              "section": "الميزات الجديدة"
+            },
+            {
+              "type": "fix",
+              "section": "الإصلاحات"
+            },
+            {
+              "type": "perf",
+              "section": "تحسينات الأداء"
+            },
+            {
+              "type": "revert",
+              "section": "التراجعات"
+            },
+            {
+              "type": "style",
+              "section": "Styles"
+            },
+            {
+              "type": "refactor",
+              "section": "أكواد أُعيد كتابتها"
+            },
+            {
+              "type": "test",
+              "section": "الإختبارات"
+            },
+            {
+              "type": "build",
+              "section": "تعديلات البناء"
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogFile": "CHANGELOG.md",
+        "changelogTitle": "# سجل التغييرات\n\nجميع التغييرات على هذا المشروع يتم توثيق ملخصها في هذا الملف.\n\nشكل الملف يستند للمرجع [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nكما يتبع هذا المشروع آلية الإصدارت الدلالية [Semantic Versioning](https://semver.org/spec/v2.0.0.html)."
+      }
+    ],
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "npm run build"
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "package.json",
+          "package-lock.json",
+          "dist/**/*"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "releasedLabels": ["released", "released-on-${nextRelease.channel}"],
+        "addReleases": "bottom"
+      }
+    ]
+  ],
+  "tagFormat": "${version}",
+  "preset": "conventionalcommits",
+  "ci": true,
+  "dryRun": false,
+  "debug": false
+}
